@@ -1,0 +1,21 @@
+{
+  "id": "conference_compact",
+  "label": "Compact Conference Default",
+  "page_size": "LETTER",
+  "margins_inches": {
+    "top": 0.75,
+    "right": 0.75,
+    "bottom": 0.75,
+    "left": 0.75
+  },
+  "font_name": "Times New Roman",
+  "font_size_pt": 10,
+  "line_spacing": 1.15,
+  "paragraph_indent_inches": 0.15,
+  "heading_numbering": false,
+  "caption_style": "italic",
+  "table_style": "compact_grid",
+  "reference_layout": "compact",
+  "front_matter": "title_then_abstract",
+  "back_matter": "references"
+}

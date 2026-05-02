@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scientific-paper-writer"
+version = "0.2.0"
+description = "Structured scientific paper workflow with deterministic validation and professional export"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "Scientific Paper Writer contributors"}
+]
+dependencies = [
+  "python-docx>=1.1.2",
+  "reportlab>=4.4.0",
+]
+
+[project.scripts]
+spw = "scientific_paper_writer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scientific_paper_writer = ["data/**/*.json"]

@@ -1,0 +1,65 @@
+{
+  "id": "empirical_imrad",
+  "label": "Empirical / IMRaD Paper",
+  "default_formatting_profile": "house_academic",
+  "default_citation_style": "apa7",
+  "default_word_target": 6000,
+  "abstract_starter_text": "[State the research problem, method, key result, and conclusion.]",
+  "default_review_checklist": [
+    "Introduction states the research problem clearly.",
+    "Method section is reproducible and does not overclaim.",
+    "Results stay separate from interpretation where appropriate.",
+    "Discussion connects findings back to the research question.",
+    "Major claims are backed by evidence links."
+  ],
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "role": "introduction",
+      "required": true,
+      "target_words": 900,
+      "starter_text": ""
+    },
+    {
+      "id": "literature_review",
+      "title": "Literature Review",
+      "role": "literature_review",
+      "required": true,
+      "target_words": 1200,
+      "starter_text": ""
+    },
+    {
+      "id": "methodology",
+      "title": "Methodology",
+      "role": "methodology",
+      "required": true,
+      "target_words": 1000,
+      "starter_text": ""
+    },
+    {
+      "id": "results",
+      "title": "Results",
+      "role": "results",
+      "required": true,
+      "target_words": 1300,
+      "starter_text": ""
+    },
+    {
+      "id": "discussion",
+      "title": "Discussion",
+      "role": "discussion",
+      "required": true,
+      "target_words": 1100,
+      "starter_text": ""
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "role": "conclusion",
+      "required": true,
+      "target_words": 500,
+      "starter_text": ""
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "short_conference",
+  "label": "Short Conference Paper",
+  "default_formatting_profile": "conference_compact",
+  "default_citation_style": "ieee",
+  "default_word_target": 3000,
+  "abstract_starter_text": "[State the problem, approach, and key contribution compactly.]",
+  "default_review_checklist": [
+    "The contribution is visible in the first page-equivalent of the paper.",
+    "Related work is concise and selective.",
+    "Results and contribution are not buried under setup text.",
+    "Over-length sections are aggressively trimmed."
+  ],
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "role": "introduction",
+      "required": true,
+      "target_words": 500,
+      "starter_text": ""
+    },
+    {
+      "id": "related_work",
+      "title": "Related Work",
+      "role": "literature_review",
+      "required": true,
+      "target_words": 450,
+      "starter_text": ""
+    },
+    {
+      "id": "approach",
+      "title": "Approach",
+      "role": "methodology",
+      "required": true,
+      "target_words": 700,
+      "starter_text": ""
+    },
+    {
+      "id": "results",
+      "title": "Results",
+      "role": "results",
+      "required": true,
+      "target_words": 850,
+      "starter_text": ""
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "role": "conclusion",
+      "required": true,
+      "target_words": 300,
+      "starter_text": ""
+    }
+  ]
+}

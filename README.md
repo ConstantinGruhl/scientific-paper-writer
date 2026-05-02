@@ -1,167 +1,283 @@
 # Scientific Paper Writer
 
-Scientific Paper Writer is a file-first AI workflow for building research-grounded paper drafts with Codex, Claude, and other assistants that can work inside a project folder.
+Scientific Paper Writer is a file-first academic writing workflow that now combines inspectable project files with structured machine-readable state, deterministic validation, and professional export.
 
-> [!WARNING]
-> This project is in development.
-> Use it for research drafts, topic exploration, literature mapping, structured note-taking, and early manuscript development.
-> Do not use it to generate a thesis and hand it in as final academic work.
+The repo began as a strong prompt-driven prototype. It is now redesigned around a small runtime package that enforces the critical guarantees in code instead of relying on markdown instructions alone.
 
-## What It Does
+## What It Guarantees Better Now
 
-- Turns a vague paper idea into a structured research workspace
-- Uses a manager-led workflow with specialist roles when the platform supports subagents
-- Supports both guided, evidence-first work and a faster `--just-write-it` mode
-- Tracks sources, claims, outline decisions, draft progress, and review checkpoints in files
-- Can export a folder-native project to `paper.docx` or `paper.tex`
+- structured workflow state with explicit stages, tasks, checkpoints, and trace events
+- deterministic word counting with configurable policies and target validation
+- paper-type defaults and formatting profiles selected by config
+- raw text, formatted, or both output modes
+- clean DOCX and PDF export from semantic structure rather than naive markdown conversion
+- structured references, evidence links, and export-time validation
+- visible markdown views that remain easy to inspect without being the only source of truth
 
-## What It Produces
+## Core Product Principles
 
-- A project brief
-- A research plan
-- Source notes
-- An evidence matrix
-- An outline
-- A working draft
-- A revision checklist
-- A final paper file
-- A visible agent status board and handoff trail
+- file-first and inspectable
+- evidence-first writing
+- manager-led orchestration where it is genuinely useful
+- structured canonical state plus rendered markdown views
+- deterministic validation for hard constraints
+- transparent, resumable workflow state
 
-## Good Use Cases
-
-- Exploring a new research topic
-- Building a structured draft before formal writing
-- Organizing sources and claims before a paper gets large
-- Working with an AI assistant without hiding the workflow in chat history
-
-## Not Intended For
-
-- Submitting AI-generated thesis text without your own academic review
-- Fabricating citations, data, quotations, or evidence
-- Replacing supervision, peer review, or institution-specific academic rules
-
-## Requirements
-
-- A recent Python 3 installation
-- Git, or the ability to download the repository as a ZIP file
-- A file-aware AI assistant such as Codex or Claude
-- Optional: `python-docx` for richer Word exports. The exporter falls back to a basic `.docx` builder if it is not installed.
-
-## Install
-
-### Option 1: Clone With Git
-
-```bash
-git clone https://github.com/ConstantinGruhl/scientific-paper-writer.git
-cd scientific-paper-writer
-```
-
-### Option 2: Download Without Git
-
-1. Open the repository page on GitHub.
-2. Choose `Code` -> `Download ZIP`.
-3. Extract the ZIP to a folder on your computer.
-4. Open that extracted folder in your terminal or AI workspace.
-
-If you want an AI assistant to walk you through installation or do it for you when possible, use [AI_INSTALL_PROMPT.md](AI_INSTALL_PROMPT.md).
-
-## Quick Start
-
-You can use the project in two ways.
-
-### Option 1: Folder-Native Workflow
-
-Use this when you want to start from a brand-new folder and keep the whole paper workspace inside that folder.
-
-1. Bootstrap a paper folder:
-
-```powershell
-python scripts/bootstrap_folder_workspace.py "C:\path\to\my-paper-folder" --title "Working Title" --output docx
-```
-
-2. Open that bootstrapped folder in Codex, Claude, or another file-aware AI.
-
-3. In chat, write:
-
-```text
-start-paper here
-```
-
-Optional faster autonomous mode:
-
-```text
-start-paper here --just-write-it
-```
-
-4. When you want an exported manuscript file, run:
-
-```powershell
-python scripts/export_manuscript.py "C:\path\to\my-paper-folder"
-```
-
-This writes `paper.docx` or `paper.tex` into the folder root, based on the workspace settings.
-
-### Option 2: Repo Workspace Workflow
-
-Use this when you want to keep multiple paper projects inside this repository.
-
-1. Create a new project scaffold:
-
-```powershell
-python scripts/init_paper_project.py my-paper-slug --title "Working Title"
-```
-
-2. Open `projects/my-paper-slug/project_brief.md`
-
-3. Ask your AI assistant to follow:
-
-- `AGENTS.md`
-- `system/system_prompt.md`
-- `system/workflow.md`
-
-4. Let the assistant interview you or fill the brief yourself.
-
-5. When you want a portable context bundle for another assistant, build a prompt packet:
-
-```powershell
-python scripts/build_prompt_packet.py my-paper-slug
-```
-
-## Helpful Prompts
-
-- [START_HERE.md](START_HERE.md): the short command reference for starting a paper
-- [PORTABLE_START_PROMPT.md](PORTABLE_START_PROMPT.md): a prompt for reproducing the folder-native workflow in another assistant
-- [AI_INSTALL_PROMPT.md](AI_INSTALL_PROMPT.md): a beginner-friendly prompt for asking an AI to explain or perform installation and setup
-
-## How It Works
-
-- File-first: durable work lives in files you can inspect and edit
-- Prompt-native: workflow rules live in Markdown rather than hidden code
-- Evidence-first: major claims should trace to sources
-- Manager-led: one orchestrator owns delegation, stage gates, and synthesis
-- Cross-AI: works with assistants that can read files and help with research
-
-## Directory Map
+## Repository Layout
 
 ```text
 .
 |-- AGENTS.md
 |-- context.md
+|-- docs/
 |-- projects/
 |-- scripts/
+|-- src/scientific_paper_writer/
 |-- system/
-|   |-- roles/
-|   |-- system_prompt.md
-|   |-- workflow.md
-|   `-- workflows/
-`-- templates/
+|-- templates/
+`-- tests/
 ```
 
-## Current Status
+Inside each project root:
 
-- The project is actively evolving
-- Prompts, workflows, and templates may change as the system matures
-- You should review all generated research plans, evidence tables, and draft text carefully before using them
+```text
+project-root/
+|-- .paper_writer/
+|   `-- state/
+|       |-- project.json
+|       |-- workflow.json
+|       |-- manuscript.json
+|       |-- sources.json
+|       |-- evidence.json
+|       |-- reviews.json
+|       |-- exports.json
+|       `-- trace.jsonl
+|-- notes/
+|-- sources/
+|-- deliverables/
+|-- project_brief.md
+|-- project_context.md
+|-- research_plan.md
+|-- bibliography.md
+|-- evidence_matrix.md
+|-- outline.md
+|-- draft.md
+|-- revision_checklist.md
+`-- agent_status.md
+```
+
+The `.paper_writer/state/` directory is canonical. The markdown files are rendered views for humans.
+
+## Install
+
+```powershell
+python -m pip install -e .
+```
+
+This installs:
+
+- `python-docx` for DOCX export
+- `reportlab` for PDF export
+
+## Command Interface
+
+Main CLI:
+
+```powershell
+spw --help
+```
+
+Key commands:
+
+```powershell
+spw bootstrap C:\path\to\paper-folder --title "Working Title"
+spw init-project my-paper --title "Working Title"
+spw render-views projects\my-paper
+spw wordcount projects\my-paper
+spw validate projects\my-paper
+spw scaffold-coverage projects\my-paper
+spw export projects\my-paper
+spw migrate projects\legacy-paper
+```
+
+Legacy script entry points still exist as wrappers:
+
+- `python scripts/bootstrap_folder_workspace.py`
+- `python scripts/init_paper_project.py`
+- `python scripts/export_manuscript.py`
+- `python scripts/build_prompt_packet.py`
+- `python scripts/migrate_legacy_workspace.py`
+
+## Output Modes
+
+Output mode is now explicit project state, not an afterthought.
+
+- `raw`: content-first text output
+- `formatted`: DOCX and PDF deliverables
+- `both`: raw text plus formatted deliverables
+
+If no preference is supplied, the system defaults to `both`.
+
+## Paper-Type Profiles
+
+Built-in paper types:
+
+- empirical / IMRaD paper
+- literature review
+- theoretical / conceptual paper
+- case study
+- thesis / dissertation chapter
+- short conference paper
+
+Profiles define:
+
+- section order
+- required sections
+- default section budgets
+- review checklist defaults
+- default formatting profile
+- default citation style
+
+## Formatting Profiles
+
+Built-in formatting profiles:
+
+- `house_academic`
+- `conference_compact`
+- `thesis_classic`
+
+They define:
+
+- page size and margins
+- fonts
+- spacing
+- heading behavior
+- caption and table defaults
+- reference layout
+
+Institution-specific overrides can be merged on top later.
+The resolved formatting snapshot is persisted in canonical project state so export uses the same effective configuration that bootstrap selected.
+
+## References And Evidence
+
+The system now supports:
+
+- structured source records
+- verified source flags
+- claim-to-source links in `evidence.json`
+- paragraph/block coverage records in `evidence.json["coverage"]`
+- reviewable coverage statuses: `suggested` and `confirmed`
+- citation tokens like `[@source-id]`
+- formatted bibliography generation
+- export blocking when cited sources are missing, unverified, or insufficiently covered
+
+Use `spw scaffold-coverage` to create deterministic suggested coverage records for reviewable prose blocks that do not already have explicit coverage. The command preserves existing records, writes only `status: "suggested"` entries, and keeps final validation strict until any required records are confirmed.
+
+Current formatted export enforces the core profile fields directly:
+
+- page size and margins
+- font family and size
+- line spacing
+- first-line paragraph indentation
+- heading numbering
+- caption styling
+- table presentation
+- reference hanging-indent layout
+
+## Figures And Visual Material
+
+Figure support is structured and safety-aware.
+
+- `figure_mode`: `off`, `suggest_only`, or `auto`
+- figure metadata lives in `evidence.json`
+- figure markers are resolved from structured metadata
+- unresolved figure markers block clean export
+- conceptual figures and evidence-bearing visuals can be distinguished explicitly
+
+## Deterministic Word Count
+
+Word counting is policy-driven and does not rely on AI.
+
+Supported controls:
+
+- exact target
+- minimum/maximum range
+- target plus or minus tolerance
+
+Configurable inclusions:
+
+- title
+- abstract
+- headings
+- figure captions
+- tables
+- references
+- appendices
+
+Use:
+
+```powershell
+spw wordcount projects\my-paper
+```
+
+## Validation And Export Gates
+
+Use:
+
+```powershell
+spw validate projects\my-paper
+```
+
+When you want help scaffolding explicit coverage before review, run:
+
+```powershell
+spw scaffold-coverage projects\my-paper
+```
+
+Validation checks include:
+
+- word-count compliance
+- unresolved TODO or markdown artifact markers
+- missing or unverified cited sources
+- missing claim-to-evidence links
+- substantial argumentative passages without coverage classification
+
+Suggested coverage records remain review prompts only. They are visible in `evidence.json` and `evidence_matrix.md`, but they do not satisfy export readiness on their own.
+
+Export now fails fast when validation does not pass.
+
+## Tests
+
+Run:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+Current tests cover:
+
+- deterministic word counting
+- section budget diagnostics
+- nested subsection and appendix rollups
+- figure-caption and table-count policy toggles
+- citation formatting
+- artifact detection
+- evidence coverage validation
+- formatting override persistence into export
+- end-to-end export smoke behavior
+
+## Redesign Docs
+
+- [Redesign spec](docs/superpowers/specs/2026-05-02-scientific-paper-writer-redesign-design.md)
+- [Gap analysis](docs/redesign-gap-analysis.md)
+- [Migration plan](docs/migration-plan.md)
+
+## Current Limitations
+
+- bibliography formatting is structured and tested, but not yet a full CSL engine
+- institution-specific formatting overrides are JSON merges, not a full template-ingestion system
+- back-matter profile fields remain conservative and do not yet provide a fully custom ordering engine
+- workflow orchestration is now structured, but AI worker execution still depends on the surrounding assistant platform
 
 ## License
 

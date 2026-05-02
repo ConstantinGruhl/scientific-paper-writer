@@ -1,0 +1,181 @@
+Metadata-Version: 2.4
+Name: scientific-paper-writer
+Version: 0.2.0
+Summary: Structured scientific paper workflow with deterministic validation and professional export
+Author: Scientific Paper Writer contributors
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: python-docx>=1.1.2
+Requires-Dist: reportlab>=4.4.0
+Dynamic: license-file
+
+# Scientific Paper Writer
+
+Scientific Paper Writer is a file-first AI workflow for building research-grounded paper drafts with Codex, Claude, and other assistants that can work inside a project folder.
+
+> [!WARNING]
+> This project is in development.
+> Use it for research drafts, topic exploration, literature mapping, structured note-taking, and early manuscript development.
+> Do not use it to generate a thesis and hand it in as final academic work.
+
+## What It Does
+
+- Turns a vague paper idea into a structured research workspace
+- Uses a manager-led workflow with specialist roles when the platform supports subagents
+- Supports both guided, evidence-first work and a faster `--just-write-it` mode
+- Tracks sources, claims, outline decisions, draft progress, and review checkpoints in files
+- Can export a folder-native project to `paper.docx` or `paper.tex`
+
+## What It Produces
+
+- A project brief
+- A research plan
+- Source notes
+- An evidence matrix
+- An outline
+- A working draft
+- A revision checklist
+- A final paper file
+- A visible agent status board and handoff trail
+
+## Good Use Cases
+
+- Exploring a new research topic
+- Building a structured draft before formal writing
+- Organizing sources and claims before a paper gets large
+- Working with an AI assistant without hiding the workflow in chat history
+
+## Not Intended For
+
+- Submitting AI-generated thesis text without your own academic review
+- Fabricating citations, data, quotations, or evidence
+- Replacing supervision, peer review, or institution-specific academic rules
+
+## Requirements
+
+- A recent Python 3 installation
+- Git, or the ability to download the repository as a ZIP file
+- A file-aware AI assistant such as Codex or Claude
+- Optional: `python-docx` for richer Word exports. The exporter falls back to a basic `.docx` builder if it is not installed.
+
+## Install
+
+### Option 1: Clone With Git
+
+```bash
+git clone https://github.com/ConstantinGruhl/scientific-paper-writer.git
+cd scientific-paper-writer
+```
+
+### Option 2: Download Without Git
+
+1. Open the repository page on GitHub.
+2. Choose `Code` -> `Download ZIP`.
+3. Extract the ZIP to a folder on your computer.
+4. Open that extracted folder in your terminal or AI workspace.
+
+If you want an AI assistant to walk you through installation or do it for you when possible, use [AI_INSTALL_PROMPT.md](AI_INSTALL_PROMPT.md).
+
+## Quick Start
+
+You can use the project in two ways.
+
+### Option 1: Folder-Native Workflow
+
+Use this when you want to start from a brand-new folder and keep the whole paper workspace inside that folder.
+
+1. Bootstrap a paper folder:
+
+```powershell
+python scripts/bootstrap_folder_workspace.py "C:\path\to\my-paper-folder" --title "Working Title" --output docx
+```
+
+2. Open that bootstrapped folder in Codex, Claude, or another file-aware AI.
+
+3. In chat, write:
+
+```text
+start-paper here
+```
+
+Optional faster autonomous mode:
+
+```text
+start-paper here --just-write-it
+```
+
+4. When you want an exported manuscript file, run:
+
+```powershell
+python scripts/export_manuscript.py "C:\path\to\my-paper-folder"
+```
+
+This writes `paper.docx` or `paper.tex` into the folder root, based on the workspace settings.
+
+### Option 2: Repo Workspace Workflow
+
+Use this when you want to keep multiple paper projects inside this repository.
+
+1. Create a new project scaffold:
+
+```powershell
+python scripts/init_paper_project.py my-paper-slug --title "Working Title"
+```
+
+2. Open `projects/my-paper-slug/project_brief.md`
+
+3. Ask your AI assistant to follow:
+
+- `AGENTS.md`
+- `system/system_prompt.md`
+- `system/workflow.md`
+
+4. Let the assistant interview you or fill the brief yourself.
+
+5. When you want a portable context bundle for another assistant, build a prompt packet:
+
+```powershell
+python scripts/build_prompt_packet.py my-paper-slug
+```
+
+## Helpful Prompts
+
+- [START_HERE.md](START_HERE.md): the short command reference for starting a paper
+- [PORTABLE_START_PROMPT.md](PORTABLE_START_PROMPT.md): a prompt for reproducing the folder-native workflow in another assistant
+- [AI_INSTALL_PROMPT.md](AI_INSTALL_PROMPT.md): a beginner-friendly prompt for asking an AI to explain or perform installation and setup
+
+## How It Works
+
+- File-first: durable work lives in files you can inspect and edit
+- Prompt-native: workflow rules live in Markdown rather than hidden code
+- Evidence-first: major claims should trace to sources
+- Manager-led: one orchestrator owns delegation, stage gates, and synthesis
+- Cross-AI: works with assistants that can read files and help with research
+
+## Directory Map
+
+```text
+.
+|-- AGENTS.md
+|-- context.md
+|-- projects/
+|-- scripts/
+|-- system/
+|   |-- roles/
+|   |-- system_prompt.md
+|   |-- workflow.md
+|   `-- workflows/
+`-- templates/
+```
+
+## Current Status
+
+- The project is actively evolving
+- Prompts, workflows, and templates may change as the system matures
+- You should review all generated research plans, evidence tables, and draft text carefully before using them
+
+## License
+
+MIT. See [LICENSE](LICENSE).

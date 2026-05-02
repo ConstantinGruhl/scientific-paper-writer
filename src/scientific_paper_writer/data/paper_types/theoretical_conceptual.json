@@ -1,0 +1,56 @@
+{
+  "id": "theoretical_conceptual",
+  "label": "Theoretical / Conceptual Paper",
+  "default_formatting_profile": "house_academic",
+  "default_citation_style": "chicago_author_date",
+  "default_word_target": 5500,
+  "abstract_starter_text": "[Summarize the problem, conceptual move, and contribution.]",
+  "default_review_checklist": [
+    "Core concepts are defined early.",
+    "Argument structure is explicit and cumulative.",
+    "Counterarguments or alternatives are addressed.",
+    "The contribution is more than a rephrasing of prior literature."
+  ],
+  "sections": [
+    {
+      "id": "problem_statement",
+      "title": "Problem Statement",
+      "role": "introduction",
+      "required": true,
+      "target_words": 800,
+      "starter_text": ""
+    },
+    {
+      "id": "conceptual_background",
+      "title": "Conceptual Background",
+      "role": "background",
+      "required": true,
+      "target_words": 1300,
+      "starter_text": ""
+    },
+    {
+      "id": "argument",
+      "title": "Main Argument",
+      "role": "analysis",
+      "required": true,
+      "target_words": 2200,
+      "starter_text": ""
+    },
+    {
+      "id": "implications",
+      "title": "Implications",
+      "role": "discussion",
+      "required": true,
+      "target_words": 700,
+      "starter_text": ""
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "role": "conclusion",
+      "required": true,
+      "target_words": 500,
+      "starter_text": ""
+    }
+  ]
+}

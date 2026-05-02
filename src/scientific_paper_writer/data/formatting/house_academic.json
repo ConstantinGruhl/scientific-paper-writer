@@ -1,0 +1,21 @@
+{
+  "id": "house_academic",
+  "label": "House Academic Default",
+  "page_size": "A4",
+  "margins_inches": {
+    "top": 1.0,
+    "right": 1.0,
+    "bottom": 1.0,
+    "left": 1.0
+  },
+  "font_name": "Times New Roman",
+  "font_size_pt": 12,
+  "line_spacing": 1.5,
+  "paragraph_indent_inches": 0.3,
+  "heading_numbering": false,
+  "caption_style": "italic",
+  "table_style": "grid",
+  "reference_layout": "hanging_indent",
+  "front_matter": "title_then_abstract",
+  "back_matter": "references_then_appendices"
+}

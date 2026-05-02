@@ -1,0 +1,56 @@
+{
+  "id": "case_study",
+  "label": "Case Study",
+  "default_formatting_profile": "house_academic",
+  "default_citation_style": "apa7",
+  "default_word_target": 5000,
+  "abstract_starter_text": "[Summarize the case, framing question, method, and principal insight.]",
+  "default_review_checklist": [
+    "The case selection is justified.",
+    "Context is rich enough for the analysis to make sense.",
+    "Analytic claims stay proportional to the case evidence.",
+    "Limitations and transferability are handled clearly."
+  ],
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "role": "introduction",
+      "required": true,
+      "target_words": 700,
+      "starter_text": ""
+    },
+    {
+      "id": "case_context",
+      "title": "Case Context",
+      "role": "background",
+      "required": true,
+      "target_words": 1100,
+      "starter_text": ""
+    },
+    {
+      "id": "methodology",
+      "title": "Methodology",
+      "role": "methodology",
+      "required": true,
+      "target_words": 800,
+      "starter_text": ""
+    },
+    {
+      "id": "analysis",
+      "title": "Analysis",
+      "role": "analysis",
+      "required": true,
+      "target_words": 1700,
+      "starter_text": ""
+    },
+    {
+      "id": "discussion",
+      "title": "Discussion And Lessons",
+      "role": "discussion",
+      "required": true,
+      "target_words": 700,
+      "starter_text": ""
+    }
+  ]
+}

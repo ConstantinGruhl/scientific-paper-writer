@@ -1,0 +1,6 @@
+{
+  "id": "ieee",
+  "label": "IEEE",
+  "family": "numeric",
+  "reference_order": "citation_order"
+}

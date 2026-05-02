@@ -1,0 +1,56 @@
+{
+  "id": "thesis_chapter",
+  "label": "Thesis / Dissertation Chapter",
+  "default_formatting_profile": "thesis_classic",
+  "default_citation_style": "apa7",
+  "default_word_target": 9000,
+  "abstract_starter_text": "",
+  "default_review_checklist": [
+    "Chapter purpose is explicit within the larger thesis arc.",
+    "Transitions to prior and following chapters are accounted for.",
+    "Section depth is balanced and substantial.",
+    "Formatting assumptions remain configurable for institution overrides."
+  ],
+  "sections": [
+    {
+      "id": "chapter_introduction",
+      "title": "Chapter Introduction",
+      "role": "introduction",
+      "required": true,
+      "target_words": 1000,
+      "starter_text": ""
+    },
+    {
+      "id": "background",
+      "title": "Background",
+      "role": "background",
+      "required": true,
+      "target_words": 1700,
+      "starter_text": ""
+    },
+    {
+      "id": "main_body",
+      "title": "Main Body",
+      "role": "analysis",
+      "required": true,
+      "target_words": 4600,
+      "starter_text": ""
+    },
+    {
+      "id": "chapter_discussion",
+      "title": "Discussion",
+      "role": "discussion",
+      "required": true,
+      "target_words": 1100,
+      "starter_text": ""
+    },
+    {
+      "id": "chapter_conclusion",
+      "title": "Chapter Conclusion",
+      "role": "conclusion",
+      "required": true,
+      "target_words": 600,
+      "starter_text": ""
+    }
+  ]
+}

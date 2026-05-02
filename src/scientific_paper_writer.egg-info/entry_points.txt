@@ -1,0 +1,2 @@
+[console_scripts]
+spw = scientific_paper_writer.cli:main

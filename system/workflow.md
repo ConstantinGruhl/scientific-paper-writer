@@ -2,35 +2,63 @@
 
 This is the manager's entry point for every paper run.
 
+## Canonical State First
+
+Always read and update canonical state in `.paper_writer/state/` before treating markdown views as current.
+
+Minimum state files:
+
+- `project.json`
+- `workflow.json`
+- `manuscript.json`
+- `sources.json`
+- `evidence.json`
+- `reviews.json`
+- `exports.json`
+
+Markdown files such as `project_brief.md`, `project_context.md`, and `draft.md` are rendered views for humans.
+
 ## Mode Selection
 
 - Use `system/workflows/normal.md` for the default guided evidence-first workflow.
 - Use `system/workflows/just_write_it.md` when the user explicitly requests `--just-write-it` or equivalent wording.
 
-Record the chosen mode in:
+Record the selected mode in:
 
-- `project_brief.md`
-- `project_context.md`
+- `project.json`
+- `workflow.json`
+- the rendered project views
 
 ## Manager Loop
 
 The manager should repeatedly:
 
-1. Read the current brief, context, and status artifacts
+1. Read canonical state and current rendered views
 2. Decide the next stage and success criteria
-3. Decompose the work into independent subtasks
-4. Spawn specialist workers for parallel slices when subagents are available
-5. Merge the outputs into the canonical project files
-6. Run a checkpoint before advancing
-7. Update the visibility layer and user-facing status
+3. Create explicit worker task objects only when decomposition is worthwhile
+4. Run the work or delegate bounded slices
+5. Merge the outputs back into canonical state
+6. Run a checkpoint before stage advancement
+7. Render views and give the user a brief status update
+
+## Stages
+
+1. `intake`
+2. `research_plan`
+3. `evidence`
+4. `outline`
+5. `drafting`
+6. `review`
+7. `export`
+8. `completed`
 
 ## Parallelization Rules
 
 - Parallelize only independent work.
-- Prefer slices by section, evidence cluster, method concern, or source family.
-- Default to 2-4 workers in a wave.
-- Avoid overlapping writes unless the manager is coordinating a merge step immediately after.
-- When workers would otherwise conflict, assign them read-only analysis tasks and let the manager apply the synthesis.
+- Prefer slices by section cluster, source family, review dimension, or evidence branch.
+- Default to 2-4 workers in a wave when real parallelism helps.
+- Avoid overlapping write ownership unless the manager is coordinating an immediate merge.
+- When workers would conflict, use read-only analysis tasks and let the manager apply synthesis.
 
 ## Visibility Layer
 
@@ -40,9 +68,10 @@ Keep these artifacts current:
 - `notes/<role>.md`
 - `notes/handoffs.md`
 - `project_context.md`
-- `agent_state.json` when supported
+- `workflow.json`
+- `trace.jsonl`
 
-These are summaries and coordination artifacts, not raw internal reasoning dumps.
+These are summaries and coordination artifacts, not raw reasoning dumps.
 
 ## Required Checkpoints
 
@@ -51,16 +80,26 @@ Run a checkpoint:
 - after intake stabilizes
 - after the research plan is credible
 - before drafting
-- before final export
-- whenever a reviewer or auditor flags drift
+- before export
+- whenever reviewer or auditor findings indicate drift
 
 Each checkpoint should confirm:
 
-- stage completion
+- stage completion status
 - evidence sufficiency
 - unresolved blockers
 - next owner
 - whether the user needs an update
+
+## Deterministic Gates
+
+Use the runtime, not memory alone, for hard checks.
+
+- `spw wordcount <project-root>`
+- `spw validate <project-root>`
+- `spw export <project-root>`
+
+The manager should not mark review or export complete if deterministic validation fails.
 
 ## Role Map
 
@@ -71,9 +110,9 @@ Each checkpoint should confirm:
 - `outliner`: structure and section planning
 - `drafter`: section drafting
 - `reviewer`: strict logical and evidence review
-- `style_proofreader`: clarity, tone, and formatting
+- `style_proofreader`: clarity and style
 - `progress_auditor`: workflow adherence and status hygiene
 
 ## Fallback Rule
 
-If subagents are unavailable, simulate the same workflow sequentially in one thread while preserving the same stages, checkpoints, and status artifacts.
+If subagents are unavailable, simulate the same workflow sequentially in one thread while preserving stages, checkpoints, and visible state updates.

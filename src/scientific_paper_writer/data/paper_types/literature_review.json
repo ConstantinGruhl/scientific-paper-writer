@@ -1,0 +1,56 @@
+{
+  "id": "literature_review",
+  "label": "Literature Review",
+  "default_formatting_profile": "house_academic",
+  "default_citation_style": "apa7",
+  "default_word_target": 7000,
+  "abstract_starter_text": "[Summarize the review scope, organizing logic, and major synthesis findings.]",
+  "default_review_checklist": [
+    "Search or selection logic is transparent.",
+    "Themes are synthesized rather than listed source by source.",
+    "Competing views and research gaps are stated clearly.",
+    "The conclusion identifies implications and future directions."
+  ],
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "role": "introduction",
+      "required": true,
+      "target_words": 900,
+      "starter_text": ""
+    },
+    {
+      "id": "review_scope",
+      "title": "Review Scope And Method",
+      "role": "review_scope",
+      "required": true,
+      "target_words": 900,
+      "starter_text": ""
+    },
+    {
+      "id": "thematic_synthesis",
+      "title": "Thematic Synthesis",
+      "role": "analysis",
+      "required": true,
+      "target_words": 3200,
+      "starter_text": ""
+    },
+    {
+      "id": "research_gaps",
+      "title": "Research Gaps",
+      "role": "analysis",
+      "required": true,
+      "target_words": 1100,
+      "starter_text": ""
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "role": "conclusion",
+      "required": true,
+      "target_words": 600,
+      "starter_text": ""
+    }
+  ]
+}
